@@ -1,0 +1,48 @@
+<html>
+
+<head>
+    <title>TheLogosTech - Vue</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+</head>
+
+<body>
+    <h1>Hello Vue</h1>
+    <div id="app">
+        <p>from vue data: {{ title }}</p>
+        <p>from vue methods: {{ getData() }}</p>
+        <p>from vue methods with param: {{ getData1('LOGOS') }}</p>
+        <p>NOT the right way to call a vue method! {{ getData }}</p>
+        <div>
+            checkbox with v-model
+            <input type="checkbox" v-model="status" @change="switchStatus($event)" />
+            {{ status }}
+        </div>
+    </div>
+    <script type="text/javascript">
+        new Vue({
+            el: '#app',
+            data: {
+                title: 'Hello Vue',
+                status: 'Active' // will be set to false / true afterwards !!!
+            },
+            methods: {
+                getData: function() {
+                    let methodData = { // note methodData will be a JSON object
+                        'methodTitle': this.title
+                    }
+                    return methodData; // will return the whole JSON object as a string: '{ "methodTitle": "Hello Vue" }'
+                },
+                getData1: function(p) {
+                    return this.title + " - " + p
+                },
+                switchStatus: function(event) {
+                    console.log("zhale:switchStatus()")
+                    console.log(event) // not really useful
+                    console.log(this.status) // changed value !
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
