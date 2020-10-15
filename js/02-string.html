@@ -1,0 +1,37 @@
+<html>
+
+<head>
+    <title>Le Zhang - JavaScript</title>
+</head>
+
+<body>
+    <h1>Hello JS</h1>
+    <p>Click the button to run; Open console to see result</p>
+    <button id="button">Run!</button>
+
+    <script type="text/javascript">
+        document.getElementById("button").onclick = function() {
+            console.log("running");
+
+            // string.split()
+            var str = "How are you doing today?";
+            var res = str.split(" ");
+            console.log(res); // array: (5) ["How", "are", "you", "doing", "today?"]
+
+            str1 = "How are you doing today?";
+            res1 = str1.split("\n");
+            console.log(res1); // this changes the single string to a 1-item array: ["How are you doing today?"]
+
+            str2 = "How are you doing today?\nThis is a new line\nThis is yet another line!";
+            res2 = str2.split("\n");
+            console.log(res2); // array: (3) ["How are you doing today?", "This is a new line", "This is yet another line!"]
+
+            // array pop() changes the source array!
+            let poped = res.pop();
+            console.log(res);   // (4) ["How", "are", "you", "doing"]
+            console.log(poped); // today?
+        }
+    </script>
+</body>
+
+</html>
