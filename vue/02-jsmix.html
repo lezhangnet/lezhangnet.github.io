@@ -1,0 +1,43 @@
+<html>
+
+<head>
+    <title>Le Zhang - Vue</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+</head>
+
+<body>
+    <h1>Hello Vue - mixed with plain JS</h1>
+    <div id="app">
+        <p>from vue data: {{ title }}</p>
+        <p>from vue methods: {{ getData() }}</p>
+    </div>
+    <script type="text/javascript">
+        console.log("zhale:in plainJS");
+        var outVar = "OUTOUTOUT";
+        console.log(vueInstance) // undefined
+
+        var vueInstance = new Vue({
+            el: '#app',
+            data: {
+                title: 'Hello Vue',
+                out: outVar
+            },
+            methods: {
+                getData: function() {
+                    let methodData = {
+                        'out via vue': this.out, // ok: OUTOUTOUT
+                        'out directly': outVar // ok: OUTOUTOUT
+                    }
+                    return methodData;
+                }
+            }
+        })
+
+        console.log(vueInstance) // Vue...
+        console.log(vueInstance.title) // ok: Hello Vue
+        console.log(vueInstance.out) // ok: OUTOUTOUT
+        console.log(vueInstance.getData()) // ok
+    </script>
+</body>
+
+</html>
