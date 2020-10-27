@@ -10,6 +10,11 @@
     <button id="button">Run!</button>
 
     <script type="text/javascript">
+        // check whehter the givin string is null, undefined or empty.
+        function isEmptyString(str) {
+            return !str
+        }
+
         document.getElementById("button").onclick = function() {
             console.log("running");
 
@@ -30,6 +35,44 @@
             let poped = res.pop();
             console.log(res);   // (4) ["How", "are", "you", "doing"]
             console.log(poped); // today?
+
+            console.log("--- isEmptyString() ---");
+            let strNull = null;
+            console.log("strNull:" + strNull + ":" + !strNull);                     // strNull:null:true
+            let strUndefinied = undefined;
+            console.log("strUndefined:" + strUndefinied + ":" + !strUndefinied);    // strUndefined:undefined:true
+            let strEmpty = '';
+            console.log("strEmpty:" + strEmpty + ":" + !strEmpty);                  // strEmpty::true
+
+            let strDeclaredOnly;
+            console.log("isEmptyString():" + isEmptyString(strNull) + isEmptyString(strUndefinied) + isEmptyString(strEmpty)
+              + isEmptyString(strDeclaredOnly)
+            ) // true x 4 :)
+
+            let strSpace = ' ';
+            console.log("strSpace:" + strSpace + ":" + !strSpace); // strSpace: :false
+
+            console.log("--- undefined ---");
+            // console.log(neverDefinedVar) // ReferenceError - NOT USE!
+            console.log(typeof neverDefinedVar) // undefined
+            console.log(typeof strUndefinied) // undefined
+            console.log(typeof(strUndefinied)) // undefined
+
+            console.log(typeof(strUndefinied) === undefined) // false !!! - NOT USE!
+            console.log(typeof(strUndefinied) === 'undefined') // true
+            console.log(typeof(strUndefinied) !== undefined) // true !!!
+            console.log(typeof(strUndefinied) !== 'undefined') // false
+
+            // == is the same as === ?
+            console.log(typeof(strUndefinied) == undefined) // false !!!
+            console.log(typeof(strUndefinied) == 'undefined') // true
+            console.log(typeof(strUndefinied) != undefined) // true !!!
+            console.log(typeof(strUndefinied) != 'undefined') // false
+
+            console.log(strUndefinied === undefined) // true
+            console.log(strUndefinied === 'undefined') // false
+            console.log(strUndefinied === null) // false
+            console.log(strUndefinied === strNull) // false
         }
     </script>
 </body>
