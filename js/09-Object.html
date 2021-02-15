@@ -1,0 +1,50 @@
+<html>
+
+<head>
+    <title>Le Zhang - JavaScript</title>
+</head>
+
+<body>
+    <h1>Hello JS</h1>
+    <p>Click the button to run; Open console to see result</p>
+    <button id="button">Run!</button>
+
+    <script type="text/javascript">
+        document.getElementById("button").onclick = function() {
+            console.log("running");
+
+            const someVar = 1234;
+            const someObject = { someVar };
+            console.log(someObject); // { someVar: 1234 }
+
+            // https://developer.mozilla.org/en-US/docs/web/javascript/reference/global_objects/object/assign
+            const target = { a: 1, b: 2 };
+            const source = { b: 4, c: 5 };
+            const returnedTarget = Object.assign(target, source);
+            console.log(target); // target is changed! NOT GOOD! see below
+            // expected output: Object { a: 1, b: 4, c: 5 }
+            console.log(returnedTarget);
+            // expected output: Object { a: 1, b: 4, c: 5 }
+
+            const target2 = { a: 1, b: 2 };
+            const source2 = { b: 4, c: 5 };
+            const returnedTarget2 = Object.assign({}, target2, source2);
+            console.log(target2); // target is NOT changed!
+            // expected output: Object { a: 1, b: 2 }
+            console.log(returnedTarget2);
+            // expected output: Object { a: 1, b: 4, c: 5 }
+
+            // vs spread - newer
+            // https://stackoverflow.com/questions/32925460/object-spread-vs-object-assign
+            const target1 = { a: 1, b: 2 };
+            const source1 = { b: 4, c: 5 };
+            const returnedTarget1 = {...target1, ...source1};
+            console.log(target1); // target is NOT changed!
+            // expected output: Object { a: 1, b: 2 }
+            console.log(returnedTarget1);
+            // expected output: Object { a: 1, b: 4, c: 5 }
+        }
+    </script>
+</body>
+
+</html>
