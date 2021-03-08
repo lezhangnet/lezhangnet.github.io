@@ -2,6 +2,7 @@
 
 <head>
     <title>Le Zhang - JavaScript</title>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.11/lodash.min.js"></script>
 </head>
 
 <body>
@@ -25,7 +26,15 @@
             // expected output: Object { a: 1, b: 4, c: 5 }
             console.log(returnedTarget);
             // expected output: Object { a: 1, b: 4, c: 5 }
+            
+            console.log("using lodash _.assign")
+            // https://lodash.com/docs/4.17.15#assign
+            const result = _.assign(target, source);
+            console.log(target) // CHANGED! NOT GOOD!
+            console.log(source) // NOT changed!
+            console.log(result) // {a: 1, b: 4, c: 5}
 
+            console.log("GOOD assign: not changing the original target")
             const target2 = { a: 1, b: 2 };
             const source2 = { b: 4, c: 5 };
             const returnedTarget2 = Object.assign({}, target2, source2);
@@ -34,6 +43,13 @@
             console.log(returnedTarget2);
             // expected output: Object { a: 1, b: 4, c: 5 }
 
+            console.log("using lodash _.assign")
+            const result2 = _.assign({}, target2, source2);
+            console.log(target2) // NOT changed!
+            console.log(source2) // NOT changed!
+            console.log(result2) // {a: 1, b: 4, c: 5}
+
+            console.log("using spread")
             // vs spread - newer
             // https://stackoverflow.com/questions/32925460/object-spread-vs-object-assign
             const target1 = { a: 1, b: 2 };

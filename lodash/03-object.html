@@ -1,0 +1,41 @@
+<html>
+
+<head>
+    <title>Le Zhang - lodash - object</title>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.11/lodash.min.js"></script>
+</head>
+
+<body>
+    <h1>Plain JavaScript with lodash</h1>
+
+    <p>Click the button to run; Open console to see result</p>
+
+    <button id="button">Run!</button>
+
+    <script>
+        document.getElementById("button").onclick = function() {
+            console.log("running");
+            // see js/09-object.html for _.assign
+
+            // setup: simple object
+            let obj = {one: 1, two: 2, three: 3};
+            console.log(obj)
+
+            console.log(_.map(obj, (v) => v)) // [1, 2, 3]
+            // NOTE the key is not part of "v"; got ARRAY of VALUES only
+
+            // keeping keys untouched, but manipulate value for each key
+            console.log(_.mapValues(obj, (v) => v + 1)) // {one: 2, two: 3, three: 4}
+            // NOTE the key is not part of "v"; got OBJECT with all the original keys
+
+            console.log(_.transform(obj, (result, value, key) => {
+                result[key + "1"] = value + 1
+            }, {})) // {one1: 2, two1: 3, three1: 4} // BOTH key AND value; got OBJECT
+            // https://lodash.com/docs/4.17.15#transform
+            console.log(_.transform(obj, (result, value, key) => {
+                result[key + "1"] = value + 1
+            })) // same as above, just omitting the empty accumulator
+        };
+    </script>
+</body>
+</html>

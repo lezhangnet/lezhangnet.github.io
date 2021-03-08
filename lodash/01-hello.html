@@ -1,0 +1,102 @@
+<html>
+
+<head>
+    <title>Le Zhang - lodash</title>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.11/lodash.min.js"></script>
+</head>
+
+<body>
+    <h1>Plain JavaScript with lodash</h1>
+
+    <p>Click the button to run; Open console to see result</p>
+
+    <button id="button">Run!</button>
+
+    <script>
+        document.getElementById("button").onclick = function() {
+            console.log("running");
+
+            // string
+            console.log(_.upperFirst("string")) // String
+            console.log(_.capitalize("string")) // String - SAME
+            console.log(_.upperFirst("string string")) // String string
+            console.log(_.capitalize("string string")) // String string - SAME
+            console.log(_.capitalize("String String")) // String string - NOTE it also change to lower case
+
+            console.log(_.startCase("string string"))  // String String
+            console.log(_.startCase("string_string"))  // String String - SAME !
+            console.log(_.snakeCase("String String"))  // string_string - GOOD !
+
+            // setup: simple array
+            const array1 = [1, 2, 3, 4];
+            const arrayString = ["one", "two", "three", "four"];
+            _.forEach(array1, (o) => { console.log(o) })
+            console.log(_.filter(arrayString, (e) => { return e === 'one' })) // ["one"] // NOTE it is still an array - see head() below
+            console.log(_.chain(arrayString).filter((e) => { return e === 'one'}).head().value()) // one
+
+            // array to ONE OBJECT via keyBy: https://lodash.com/docs/4.17.15#keyBy
+            // NOTE there is no way to change the value here, see map below
+            console.log(_.keyBy(array1, (o) => o)) // {1: 1, 2: 2, 3: 3, 4: 4}
+            const obj = _.keyBy(arrayString, (o) => o.charAt(0))
+            console.log(obj) // {o: "one", t: "three", f: "four"} // NOTE "two" is discarded !!!
+            // NOTE the result is an OBJECT rather than a true Map !!!
+
+            // obj VALUES to array via map
+            console.log(_.map(obj, (kvp) => "test")) // ["test", "test", "test"]
+            console.log(_.map(obj, (kvp) => kvp)) // ["one", "three", "four"] // NOTE the key is not part of "kvp"
+            console.log(_.map(obj, (kvp) => { console.log(kvp) })) // "one"; "three"; "four" // NOTE the key is not part of "kvp"
+            // this also returns [undefined, undefined, undefined] as there is no return value for each element
+
+            // more complex array transform // NOTE transform is actually on Object - ref 02-object.html
+            // ref .map below for simple array transform
+            // array to array
+            console.log(_.transform(arrayString, (result, o) => {
+                result.push(o);
+            }, [])) // ["one", "two", "three", "four"]
+            // array to REAL MAP
+            const map = _.transform(arrayString, (result, o) => {
+                let k = o.charAt(0);
+                let v = result.get(k) || [];
+                v.push(o);
+                result.set(k, v);
+            }, new Map());
+            console.log(map) // Map(3) {"o" => Array(1), "t" => Array(2), "f" => Array(1)}
+
+            // map to ENTRIES ARRAY with both key and value
+            const entries = map.entries();
+            console.log(entries) // MapIterator, NOT an array !!!
+            const entriesArray = Array.from(entries);
+            console.log(entriesArray) // (3) [Array(2), Array(2), Array(2)]:
+            // 0: (2) ["o", Array(1)] 1: (2) ["t", Array(2)] 2: (2) ["f", Array(1)]
+            _.forEach(entriesArray, ([k, v]) => {
+                console.log(k + v);
+                console.log(v.length);
+            })
+            console.log(_.filter(entriesArray, ([k, v]) => {
+                return v.length > 1
+            })) // [Array(2)]: 0: (2) ["t", Array(2)]
+
+
+            let dateArray = [
+                new Date(2020, 0, 1),
+                new Date(2019, 11),
+                new Date(2019, 1),
+                new Date(2019, 6)
+            ]
+            console.log(dateArray)  // 0: Wed Jan 01 2020 00:00:00 GMT-0800 (Pacific Standard Time) {}
+                                    // 1: Sun Dec 01 2019 00:00:00 GMT-0800 (Pacific Standard Time) {}
+                                    // 2: Fri Feb 01 2019 00:00:00 GMT-0800 (Pacific Standard Time) {}
+                                    // 3: Mon Jul 01 2019 00:00:00 GMT-0700 (Pacific Daylight Time) {}
+            console.log(_.sortBy(dateArray)) // GOOD!
+            // 0: Fri Feb 01 2019 00:00:00 GMT-0800 (Pacific Standard Time) {}
+            // 1: Mon Jul 01 2019 00:00:00 GMT-0700 (Pacific Daylight Time) {}
+            // 2: Sun Dec 01 2019 00:00:00 GMT-0800 (Pacific Standard Time) {}
+            // 3: Wed Jan 01 2020 00:00:00 GMT-0800 (Pacific Standard Time) {}
+            dateArray.push(new Date(2019, 6))
+            console.log(dateArray.length) // 5
+            console.log(_.union([1, 2, 2, 1, 3])) // [1, 2, 3]
+            console.log(_.union(dateArray)) // this does NOT work on Date!!!
+        };
+    </script>
+</body>
+</html>
