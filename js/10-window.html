@@ -1,0 +1,23 @@
+<html>
+
+<head>
+    <title>Le Zhang - JavaScript</title>
+</head>
+
+<body>
+    <h1>Hello JS Window</h1>
+    <p>Click the button to run; Open console to see result</p>
+    <button id="button">Run!</button>
+
+    <script type="text/javascript">
+        document.getElementById("button").onclick = function() {
+            console.log("running");
+
+            window.location.reload(true);
+            // https://www.w3docs.com/snippets/javascript/how-to-reload-a-page-using-javascript.html
+            // https://techbriefers.com/10-methods-for-how-to-refresh-a-page-in-javascript/ - seems overkill
+        }
+    </script>
+</body>
+
+</html>

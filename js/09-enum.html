@@ -1,0 +1,46 @@
+<html>
+
+<head>
+    <title>Le Zhang - JavaScript</title>
+</head>
+
+<body>
+    <h1>Hello JS Enum</h1>
+    <p>Click the button to run; Open console to see result</p>
+    <button id="button">Run!</button>
+
+    <script type="text/javascript">
+        document.getElementById("button").onclick = function() {
+            console.log("running");
+
+            // https://www.educba.com/javascript-enum/
+            //declaring enum constant with directions variable
+            const directions = {
+                EAST: 'east', //assinging values to constants
+                WEST: 'west',
+                NORTH: 'north',
+                SOUTH: 'south'
+            };
+            //Accessing single value to check with switch case
+            let direction = directions.SOUTH;
+            if(!direction) {
+                throw new Error("<h1 style='color:red'>Direction is not there in the above enum</h1>")
+            }
+            switch(direction) {
+                case directions.EAST:
+                    document.write("<h2 style='color:green'>Hi, I am EAST<h2><br>");
+                    break;
+                case directions.WEST:
+                    document.write("<h2 style='color:green'>Hi, I am WEST</h2><br>");
+                    break;
+                case directions.NORTH:
+                    document.write("<h2 style='color:green'>Hi, I am NORTH</h2><br>");
+                    break;
+                case directions.SOUTH:
+                    document.write("<h2 style='color:green'>Hi, I am SOUTH</h2><br>");
+            }
+        }
+    </script>
+</body>
+
+</html>

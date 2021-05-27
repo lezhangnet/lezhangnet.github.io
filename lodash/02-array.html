@@ -30,6 +30,14 @@
             console.log(_.flatMap(array1, duplicate)); // (8) [1, 1, 2, 2, 3, 3, 4, 4]
             console.log(_.flatMap(array1, n => [n, n])); // same
             console.log(_(array1).flatMap(duplicate).value()); // same
+
+            // the following will change the original array
+            console.log(array1) // verify the original array is not changed
+            const evens = _.remove(array1, function(n) {
+                return n % 2 == 0;
+            });
+            console.log(array1) // the remaining elements
+            console.log(evens)  // the removed elements
         };
     </script>
 </body>
